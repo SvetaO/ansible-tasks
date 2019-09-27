@@ -9,15 +9,43 @@
       apt:
         name: openjdk-8-jdk
         update_cache: yes
+
     - name: Add Jenkins key
       apt_key:
         url: https://pkg.jenkins.io/debian/jenkins.io.key
-    - name:
+
+    - name: Add Jenkins repo
       apt_repository:
         repo: deb http://pkg.jenkins.io/debian-stable binary/ 
         state: present
         filename: jenkins
+
     - name: Install Jenkins
       apt:
         name: jenkins
+        update_cache: yes
+
+    - name: Install packages needed for Docker
+      vars:
+        list_of_pkgs: ['apt-transport-https', 'ca-certificates', 'curl', 'software-properties-common', 'python3-pip', 'virtualenv', 'python3-setuptools']
+      apt:
+        name: "{{ list_of_pkgs }}"
+        state: latest
+        update_cache: yes
+
+    - name:  Add Docker GPG key
+      apt_key:
+        url: https://download.docker.com/linux/ubuntu/gpg
+        id: 9DC858229FC7DD38854AE2D88D81803C0EBFCD88
+
+    - name: Add Docker repo
+      apt_repository:
+        repo: deb https://download.docker.com/linux/ubuntu bionic stable
+        state: present
+    
+    - name: Install Docker
+      vars:
+        list_of_pkgs: ['docker-ce', 'docker-ce-cli', 'containerd.io']
+      apt:
+        name: "{{ list_of_pkgs }}"
         update_cache: yes
