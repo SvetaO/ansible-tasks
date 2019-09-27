@@ -9,3 +9,11 @@
       apt:
         name: openjdk-8-jdk
         update_cache: yes
+    - name: Add Jenkins key
+      apt_key:
+        url: https://pkg.jenkins.io/debian/jenkins.io.key
+    - name:
+      apt_repository:
+        repo: deb http://pkg.jenkins.io/debian-stable binary/ 
+        state: present
+        filename: jenkins
