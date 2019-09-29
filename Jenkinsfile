@@ -5,8 +5,8 @@ pipeline {
     stages {
         stage('Build docker image & run python script') {
             steps {
-                echo "Hello"
-                //
+                echo "Hello from simple script"
+                sh "python ./simple.py"
             }
         }
     }

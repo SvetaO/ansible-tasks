@@ -49,3 +49,14 @@
       apt:
         name: "{{ list_of_pkgs }}"
         update_cache: yes
+
+    - name: Create Docker group
+      group:
+        name: docker
+        state: present
+
+    - name: Add Jenkins to docker group
+      user:
+        name: jenkins
+        groups: docker
+        append: yes

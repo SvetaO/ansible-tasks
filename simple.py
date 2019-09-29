@@ -1,10 +1,10 @@
 #!/usr/bin/env python
-import sys 
+import sys
 
 def main(args):
     print("Hello from simple python script!")
     print("Passed args: {}".format(args))
-    exit(0)
+    sys.exit(0)
 
 
 if __name__ == "__main__":
